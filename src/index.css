@@ -1,0 +1,197 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* clip corta o que vaza para os lados sem quebrar o position: sticky; hidden fica para navegadores antigos */
+html, body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    --background: 36 22% 94%;
+    --foreground: 24 12% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 24 12% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 12% 10%;
+
+    --primary: 352 72% 36%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 34 20% 90%;
+    --secondary-foreground: 24 12% 10%;
+
+    --muted: 32 15% 90%;
+    --muted-foreground: 25 10% 32%;
+
+    --accent: 28 40% 92%;
+    --accent-foreground: 24 9% 14%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 30 12% 82%;
+    --input: 30 12% 76%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Modo escuro: segue o sistema da pessoa (script no index.html liga a classe .dark) */
+  .dark {
+    color-scheme: dark;
+
+    --background: 0 0% 4.5%;
+    --foreground: 40 20% 96%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 40 20% 96%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 40 20% 96%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 40 20% 96%;
+
+    --muted: 0 0% 13%;
+    --muted-foreground: 30 8% 72%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 40 20% 96%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 21%;
+    --input: 0 0% 26%;
+    --ring: 38 92% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans font-medium;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* A Raleway usa números "antigos" por padrão; estes ficam alinhados e legíveis nos preços */
+    font-variant-numeric: lining-nums;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* Botões e campos não herdam isso do body por padrão */
+  button, input, select, textarea {
+    font-variant-numeric: inherit;
+  }
+}
+
+@layer components {
+  .butcher-container {
+    @apply max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .logo-marumbi {
+    @apply transition-all duration-300 ease-in-out;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+  
+  .logo-marumbi:hover {
+    @apply scale-105;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)) brightness(1.05);
+  }
+  
+  .section-title {
+    @apply relative font-serif font-bold text-3xl md:text-4xl lg:text-5xl text-butcher-950 mb-6 md:mb-8;
+  }
+  
+  /* .section-title::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-16 h-1 bg-beef-600 mt-2;
+  } */
+  
+  .section-subtitle {
+    @apply font-sans text-sm tracking-wider uppercase text-butcher-500 mb-2;
+  }
+  
+  .premium-card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .premium-badge {
+    @apply inline-block px-3 py-1 text-xs font-medium rounded-full bg-gold-100 text-gold-800;
+  }
+  
+  .product-transition {
+    @apply transition-all duration-300 transform hover:scale-[1.02];
+  }
+  
+  .store-tag {
+    @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded-full border backdrop-blur-sm;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  
+  .store-tag-single {
+    @apply store-tag;
+  }
+  
+  .store-tag-multiple {
+    @apply store-tag bg-gold-50/90 text-gold-800 border-gold-300;
+  }
+  
+  .store-tag-special-price {
+    @apply store-tag bg-orange-50/95 text-orange-800 border-orange-300;
+  }
+  
+  .special-glow {
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), 0 0 20px rgba(212, 175, 55, 0.15);
+  }
+  
+  .special-glow:hover {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.35), 0 0 25px rgba(212, 175, 55, 0.2);
+  }
+}
+
+.map-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}

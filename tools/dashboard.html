@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo Marumbi · Dashboard</title>
+<style>
+  :root {
+    --fundo: #f7f4f1; --cartao: #fff; --texto: #2a2420; --suave: #7a6f66; --borda: #e6dfd8;
+    --marca: #9f1b2b; --ok: #1f7a3a; --aviso: #a15c00; --novo: #2457a6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--fundo); color: var(--texto); }
+  header { background: #111; color: #fff; padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  header h1 { font-size: 17px; margin: 0 16px 0 0; }
+  .abas button { background: transparent; color: #ccc; border: 1px solid #444; padding: 7px 14px; border-radius: 999px; cursor: pointer; margin-right: 6px; }
+  .abas button.ativa { background: var(--marca); border-color: var(--marca); color: #fff; }
+  .acoes { margin-left: auto; display: flex; gap: 8px; }
+  button.primario, button.secundario { border: 0; border-radius: 6px; padding: 8px 14px; font-weight: 600; cursor: pointer; }
+  button.primario { background: var(--marca); color: #fff; }
+  button.secundario { background: #fff; color: #111; }
+  button:disabled { opacity: .5; cursor: default; }
+  main { padding: 16px 20px 60px; max-width: 1300px; margin: 0 auto; }
+  #status { min-height: 22px; margin-bottom: 10px; font-weight: 500; }
+  #status.erro { color: #b00020; }
+  .cartao { background: var(--cartao); border: 1px solid var(--borda); border-radius: 10px; margin-bottom: 18px; }
+  .cartao > h2 { font-size: 15px; margin: 0; padding: 12px 14px; border-bottom: 1px solid var(--borda); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .cartao > h2 small { font-weight: 400; color: var(--suave); }
+  .filtros { display: flex; gap: 14px; align-items: center; margin-left: auto; font-weight: 400; font-size: 13px; }
+  .filtros input[type=search] { padding: 6px 10px; border: 1px solid var(--borda); border-radius: 6px; width: 220px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 7px 10px; border-bottom: 1px solid var(--borda); text-align: left; vertical-align: middle; }
+  th { font-size: 12px; color: var(--suave); font-weight: 600; background: #faf8f6; position: sticky; top: 0; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td input[type=text], td select { width: 100%; padding: 5px 7px; border: 1px solid var(--borda); border-radius: 5px; font: inherit; }
+  tr.fora td:not(:first-child) { color: var(--suave); }
+  tr.fora input[type=text], tr.fora select { opacity: .55; }
+  .selo { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+  .selo.ok { background: #e3f3e8; color: var(--ok); }
+  .selo.aviso { background: #fdf0dc; color: var(--aviso); }
+  .selo.novo { background: #e4ecf8; color: var(--novo); }
+  .vazio { padding: 24px; text-align: center; color: var(--suave); }
+  .dica { color: var(--suave); font-size: 13px; padding: 10px 14px; margin: 0; }
+  .rolagem { max-height: 65vh; overflow: auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Catálogo do site · Dashboard local</h1>
+  <div class="abas" id="abas"></div>
+  <div class="acoes">
+    <button class="secundario" id="puxar">Puxar do GranMoney</button>
+    <button class="primario" id="salvar" disabled>Salvar escolhas</button>
+    <button class="secundario" id="publicar">Publicar no site</button>
+  </div>
+</header>
+<main>
+  <div id="status"></div>
+
+  <section class="cartao">
+    <h2>
+      Produtos do GranMoney <small id="contagem"></small>
+      <span class="filtros">
+        <label><input type="checkbox" id="soKg" checked> Só vendidos por KG</label>
+        <label><input type="checkbox" id="soSite"> Só os que estão no site</label>
+        <input type="search" id="busca" placeholder="Buscar por nome ou código">
+      </span>
+    </h2>
+    <p class="dica">Marque o que entra no site desta unidade e dê o nome que o cliente vai ver. Para ligar a um produto que já está no site, escolha o nome dele na lista do campo "Nome no site". O preço vem sempre do GranMoney.</p>
+    <div class="rolagem">
+      <table>
+        <thead><tr><th style="width:44px">Site</th><th style="width:80px">Código</th><th>Nome no GranMoney</th><th style="width:100px">R$/kg</th><th>Nome no site</th><th style="width:140px">Categoria</th><th style="width:150px">Situação</th></tr></thead>
+        <tbody id="linhasGM"><tr><td colspan="7" class="vazio">Clique em "Puxar do GranMoney" para carregar os produtos desta unidade.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="cartao">
+    <h2>No site, ainda sem código do GranMoney <small id="contagemSem"></small></h2>
+    <p class="dica">Estes vieram do site antigo. Ligue cada um a um código na tabela de cima (escolhendo o mesmo nome) ou tire desta unidade.</p>
+    <table>
+      <thead><tr><th>Nome no site</th><th style="width:140px">Categoria</th><th style="width:110px">R$/kg no site</th><th style="width:170px"></th></tr></thead>
+      <tbody id="linhasSem"></tbody>
+    </table>
+  </section>
+</main>
+<datalist id="nomesSite"></datalist>
+
+<script>
+const estado = { lojas: {}, categorias: [], comCredencial: {}, catalogo: null, loja: 'marumbi1', gm: {}, linhas: {} };
+const $ = id => document.getElementById(id);
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const preco = n => n == null ? '—' : n.toFixed(2).replace('.', ',');
+const norm = t => String(t ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+const NOMES_CATEGORIA = { bovinos: 'Bovinos', suinos: 'Suínos', aves: 'Aves', 'moídas': 'Moídas' };
+
+function status(msg, erro = false) { $('status').textContent = msg; $('status').className = erro ? 'erro' : ''; }
+
+async function api(metodo, caminho, corpo) {
+  const res = await fetch(caminho, { method: metodo, headers: corpo ? { 'Content-Type': 'application/json' } : {}, body: corpo ? JSON.stringify(corpo) : undefined });
+  const dados = await res.json();
+  if (!res.ok) throw new Error(dados.erro || 'Erro');
+  return dados;
+}
+
+// Sugestões para produto novo: nome mais legível e categoria pelo nome
+function nomeSugerido(nome) { return nome.toLowerCase().replace(/(^|[\s/(-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase()); }
+function categoriaSugerida(nome) {
+  const n = norm(nome);
+  if (/frango|sobrecoxa|coxinha|tulipa|\basa\b|galinha|chester|peru|moela/.test(n)) return 'aves';
+  // Embutidos ficam em Suínos; os outros miúdos ficam em Bovinos
+  if (/lingui|calabresa|vina|salsicha|mortadela|presunto|salame/.test(n)) return 'suinos';
+  if (/suin|porco|lombo|pernil|bisteca|panceta|bacon|costelinha|picadao|suan|toucinho|copa/.test(n)) return 'suinos';
+  if (/moid[ao]/.test(n)) return 'moídas';
+  return 'bovinos';
+}
+
+function vinculoDoCodigo(codigo) {
+  return estado.catalogo.produtos.find(p => p.lojas[estado.loja]?.codigo === codigo);
+}
+
+function montarLinhas() {
+  const lista = estado.gm[estado.loja] || [];
+  const repetidos = {};
+  for (const p of lista) if (p.codigo) repetidos[p.codigo] = (repetidos[p.codigo] || 0) + 1;
+  const linhas = {};
+  for (const p of lista) {
+    if (!p.codigo) continue;
+    const site = vinculoDoCodigo(p.codigo);
+    linhas[p.codigo] = {
+      ...p,
+      repetido: repetidos[p.codigo] > 1,
+      noSite: !!site,
+      precoSite: site?.lojas[estado.loja].preco,
+      incluir: !!site,
+      nomeSite: site?.nome ?? nomeSugerido(p.nome),
+      categoria: site?.categoria ?? categoriaSugerida(p.nome),
+      mexido: false,
+    };
+  }
+  estado.linhas[estado.loja] = linhas;
+}
+
+function situacao(l) {
+  if (l.repetido) return '<span class="selo aviso">Código repetido</span>';
+  if (!l.noSite) return l.incluir ? '<span class="selo novo">Vai entrar</span>' : '';
+  if (!l.incluir) return '<span class="selo aviso">Vai sair</span>';
+  if (l.precoSite !== l.preco) return `<span class="selo aviso">Site: R$ ${preco(l.precoSite)}</span>`;
+  return '<span class="selo ok">No site</span>';
+}
+
+function renderGM() {
+  const linhas = estado.linhas[estado.loja];
+  const corpo = $('linhasGM');
+  if (!linhas) {
+    corpo.innerHTML = `<tr><td colspan="7" class="vazio">${estado.comCredencial[estado.loja] ? 'Clique em "Puxar do GranMoney" para carregar os produtos desta unidade.' : 'Faltam as credenciais desta unidade em tools/.env.'}</td></tr>`;
+    $('contagem').textContent = '';
+    return;
+  }
+  const termo = norm($('busca').value);
+  const visiveis = Object.values(linhas)
+    .filter(l => !$('soKg').checked || l.porPeso || l.noSite)
+    .filter(l => !$('soSite').checked || l.incluir)
+    .filter(l => !termo || norm(l.nome).includes(termo) || norm(l.nomeSite).includes(termo) || l.codigo.includes(termo))
+    .sort((a, b) => (b.incluir - a.incluir) || a.nome.localeCompare(b.nome, 'pt-BR'));
+  const marcados = Object.values(linhas).filter(l => l.incluir).length;
+  $('contagem').textContent = `${visiveis.length} mostrados · ${marcados} no site`;
+  const opcoes = sel => estado.categorias.map(c => `<option value="${esc(c)}"${c === sel ? ' selected' : ''}>${esc(NOMES_CATEGORIA[c] || c)}</option>`).join('');
+  corpo.innerHTML = visiveis.length ? visiveis.map(l => `
+    <tr class="${l.incluir ? '' : 'fora'}" data-codigo="${esc(l.codigo)}">
+      <td><input type="checkbox" data-campo="incluir" ${l.incluir ? 'checked' : ''} ${l.repetido ? 'disabled' : ''}></td>
+      <td>${esc(l.codigo)}</td>
+      <td>${esc(l.nome)}${l.porPeso ? '' : ' <span class="selo aviso">UN</span>'}</td>
+      <td class="num">${preco(l.preco)}</td>
+      <td><input type="text" data-campo="nomeSite" list="nomesSite" value="${esc(l.nomeSite)}"></td>
+      <td><select data-campo="categoria">${opcoes(l.categoria)}</select></td>
+      <td>${situacao(l)}</td>
+    </tr>`).join('') : '<tr><td colspan="7" class="vazio">Nenhum produto com esses filtros.</td></tr>';
+}
+
+function renderSemCodigo() {
+  const sem = estado.catalogo.produtos.filter(p => p.lojas[estado.loja] && !p.lojas[estado.loja].codigo);
+  $('contagemSem').textContent = `${sem.length}`;
+  $('linhasSem').innerHTML = sem.length ? sem.map(p => `
+    <tr>
+      <td>${esc(p.nome)}</td>
+      <td>${esc(NOMES_CATEGORIA[p.categoria] || p.categoria)}</td>
+      <td class="num">${preco(p.lojas[estado.loja].preco)}</td>
+      <td><button class="secundario" style="border:1px solid #ddd;white-space:nowrap;font-weight:500;padding:5px 10px" data-remover="${esc(p.id)}">Tirar desta unidade</button></td>
+    </tr>`).join('') : '<tr><td colspan="4" class="vazio">Todos os produtos desta unidade estão ligados a um código.</td></tr>';
+  $('nomesSite').innerHTML = estado.catalogo.produtos.map(p => `<option value="${esc(p.nome)}">`).join('');
+}
+
+function renderAbas() {
+  $('abas').innerHTML = Object.entries(estado.lojas).map(([id, nome]) => `<button data-loja="${id}" class="${id === estado.loja ? 'ativa' : ''}">${esc(nome)}</button>`).join('');
+}
+
+function render() {
+  renderAbas(); renderGM(); renderSemCodigo();
+  const mexidos = Object.values(estado.linhas[estado.loja] || {}).some(l => l.mexido);
+  $('salvar').disabled = !mexidos;
+}
+
+$('abas').addEventListener('click', e => {
+  const loja = e.target.dataset.loja;
+  if (!loja) return;
+  estado.loja = loja; status(''); render();
+});
+
+$('linhasGM').addEventListener('change', e => {
+  const tr = e.target.closest('tr'); const campo = e.target.dataset.campo;
+  if (!tr || !campo) return;
+  const l = estado.linhas[estado.loja][tr.dataset.codigo];
+  l[campo] = campo === 'incluir' ? e.target.checked : e.target.value;
+  // Nome de um produto que já existe no site: herda a categoria dele
+  if (campo === 'nomeSite') {
+    const existente = estado.catalogo.produtos.find(p => norm(p.nome) === norm(l.nomeSite));
+    if (existente) l.categoria = existente.categoria;
+  }
+  l.mexido = true;
+  render();
+});
+
+$('linhasSem').addEventListener('click', async e => {
+  const id = e.target.dataset.remover;
+  if (!id) return;
+  const p = estado.catalogo.produtos.find(x => x.id === id);
+  if (!confirm(`Tirar "${p.nome}" da ${estado.lojas[estado.loja]}?`)) return;
+  try {
+    estado.catalogo = (await api('POST', '/api/remover', { loja: estado.loja, id })).catalogo;
+    status(`"${p.nome}" saiu desta unidade. Falta publicar.`); render();
+  } catch (err) { status(err.message, true); }
+});
+
+['soKg', 'soSite', 'busca'].forEach(id => $(id).addEventListener('input', renderGM));
+
+$('puxar').addEventListener('click', async () => {
+  $('puxar').disabled = true;
+  status(`Entrando no GranMoney da ${estado.lojas[estado.loja]}...`);
+  try {
+    const { produtos } = await api('POST', '/api/granmoney', { loja: estado.loja });
+    estado.gm[estado.loja] = produtos;
+    montarLinhas();
+    status(`${produtos.length} produtos ativos carregados da ${estado.lojas[estado.loja]}.`);
+    render();
+  } catch (err) { status(err.message, true); }
+  $('puxar').disabled = false;
+});
+
+$('salvar').addEventListener('click', async () => {
+  const linhas = Object.values(estado.linhas[estado.loja]).filter(l => l.mexido || l.incluir)
+    .map(({ codigo, nome, preco, incluir, nomeSite, categoria }) => ({ codigo, nomeGranMoney: nome, preco, incluir, nomeSite, categoria }));
+  try {
+    const { resumo, catalogo } = await api('POST', '/api/salvar', { loja: estado.loja, linhas });
+    estado.catalogo = catalogo;
+    montarLinhas();
+    status(`Salvo: ${resumo.vinculados} no site, ${resumo.criados} novos, ${resumo.removidos} retirados. Falta publicar.`);
+    render();
+  } catch (err) { status(err.message, true); }
+});
+
+$('publicar').addEventListener('click', async () => {
+  if (!confirm('Publicar o catálogo no site agora?')) return;
+  $('publicar').disabled = true;
+  status('Publicando...');
+  try { status((await api('POST', '/api/publicar')).mensagem); } catch (err) { status(err.message, true); }
+  $('publicar').disabled = false;
+});
+
+api('GET', '/api/catalogo').then(d => {
+  Object.assign(estado, { lojas: d.lojas, categorias: d.categorias, comCredencial: d.comCredencial, catalogo: d.catalogo });
+  render();
+}).catch(err => status(err.message, true));
+</script>
+</body>
+</html>

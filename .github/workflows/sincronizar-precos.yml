@@ -1,0 +1,40 @@
+# Lê os preços no GranMoney de cada unidade e, se algum produto vinculado mudou,
+# atualiza src/data/catalogo.json na main (a Vercel publica sozinha).
+# Credenciais em Settings → Secrets and variables → Actions:
+#   GM_MARUMBI1_EMAIL, GM_MARUMBI1_SENHA, GM_MARUMBI3_EMAIL, GM_MARUMBI3_SENHA
+# Unidade sem segredo é pulada.
+name: Sincronizar preços do GranMoney
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sincronizar-precos
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Sincronizar
+        env:
+          GM_MARUMBI1_EMAIL: ${{ secrets.GM_MARUMBI1_EMAIL }}
+          GM_MARUMBI1_SENHA: ${{ secrets.GM_MARUMBI1_SENHA }}
+          GM_MARUMBI3_EMAIL: ${{ secrets.GM_MARUMBI3_EMAIL }}
+          GM_MARUMBI3_SENHA: ${{ secrets.GM_MARUMBI3_SENHA }}
+        run: |
+          git config user.name "sincronizacao-granmoney"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          node tools/sincronizar.mjs --publicar

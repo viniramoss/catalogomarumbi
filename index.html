@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Açougue Marumbi | Catálogo de preços</title>
+    <meta name="description" content="Catálogo de preços das unidades do Açougue Marumbi, em Curitiba." />
+    <meta name="author" content="Marumbi" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Modo claro ou escuro conforme o sistema da pessoa (sem preferência, fica claro).
+         Roda antes da página aparecer para não piscar. -->
+    <script>
+      (function () {
+        var escuro = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        var aplicar = function () {
+          document.documentElement.classList.toggle('dark', !!(escuro && escuro.matches));
+        };
+        aplicar();
+        if (escuro && escuro.addEventListener) escuro.addEventListener('change', aplicar);
+        else if (escuro && escuro.addListener) escuro.addListener(aplicar);
+      })();
+    </script>
+
+    <meta property="og:title" content="Açougue Marumbi | Catálogo de preços" />
+    <meta property="og:description" content="Casa de Carnes Marumbi" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <link rel="icon" type="image/png" href="./src/logo/boiSemFMelhor.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@casadecarnesmarumbi" />
+    <meta name="twitter:image" content="./src/images/LogoMarumbiS.png" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
