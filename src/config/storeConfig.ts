@@ -47,7 +47,7 @@ export const storeLocations: Record<string, StoreLocation> = {
     embedUrl: "https://www.google.com/maps?q=Rua%20Eunice%20Bettini%20Bartoszeck%2C%201122%2C%20Uberaba%2C%20Curitiba%20-%20PR&output=embed",
     directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Rua+Eunice+Bettini+Bartoszeck,+1122,+Uberaba,+Curitiba+-+PR",
     hours: {
-      weekdays: "8:00 - 21:00",
+      weekdays: "8:00 - 20:00",
       sunday: "9:00 - 14:00"
     },
     order: 1

@@ -217,4 +217,4 @@ Fechou ou mudou uma loja? O catálogo é só uma das pontas. Lembre também do *
 - A Marumbi 2 (Cajuru) foi removida em agosto de 2026
 - A numeração segue 1 e 3 de propósito, para o Capão continuar com o nome que os clientes conhecem
 - Em outubro de 2026 o catálogo de preços saiu do site original e ganhou este repositório: um site para cada unidade, só com nome e preço/kg, com todos os produtos ligados a um código do GranMoney. O site original continua no ar, sem mudanças. O histórico desse trabalho está no PR #1 do repositório `viniramoss/casadecarnesmarumbi`
-- Os dois projetos na Vercel (`catalogomarumbiuberaba` e `catalogomarumbiimbuia`) ainda não foram criados
+- Os dois sites estão no ar desde 16/10/2026, nos projetos `catalogomarumbiuberaba` e `catalogomarumbiimbuia` da Vercel
