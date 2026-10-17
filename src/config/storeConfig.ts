@@ -30,6 +30,13 @@ export const contatos = {
   email: "casadecarnesmarumbiadm@gmail.com",
 };
 
+// Mensagem que já vem escrita quando a pessoa chama a loja no WhatsApp pelo site
+export const mensagemWhatsApp = "Olá, vim pelo site, pode me passar algumas informações??";
+
+// Link do WhatsApp com a mensagem acima, a partir do número no formato +5541999999999
+const linkDoWhatsApp = (numero: string) =>
+  `https://wa.me/${numero.replace(/\D/g, "")}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+
 // Configuração das unidades Marumbi em operação
 export const storeLocations: Record<string, StoreLocation> = {
   uberaba: {
@@ -43,7 +50,7 @@ export const storeLocations: Record<string, StoreLocation> = {
     cep: "CEP: 81590-180",
     phone: "(41) 99853-2456",
     whatsappNumber: "+5541998532456",
-    whatsappLink: "https://wa.me/+5541998532456?text=Olá,%20vim%20pelo%20site,%20pode%20me%20passar%20algumas%20informações??%20:)%20",
+    whatsappLink: linkDoWhatsApp("+5541998532456"),
     embedUrl: "https://www.google.com/maps?q=Rua%20Eunice%20Bettini%20Bartoszeck%2C%201122%2C%20Uberaba%2C%20Curitiba%20-%20PR&output=embed",
     directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Rua+Eunice+Bettini+Bartoszeck,+1122,+Uberaba,+Curitiba+-+PR",
     hours: {
@@ -63,7 +70,7 @@ export const storeLocations: Record<string, StoreLocation> = {
     cep: "CEP: 82810-060",
     phone: "(41) 99735-3725",
     whatsappNumber: "+5541997353725",
-    whatsappLink: "https://wa.me/+5541997353725?text=Olá,%20vim%20pelo%20site,%20pode%20me%20passar%20algumas%20informações??%20:)%20",
+    whatsappLink: linkDoWhatsApp("+5541997353725"),
     embedUrl: "https://www.google.com/maps?q=Rua%20Delegado%20Leopoldo%20Belczak%2C%202045%2C%20Cap%C3%A3o%20da%20Imbuia%2C%20Curitiba%20-%20PR&output=embed",
     directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Rua+Delegado+Leopoldo+Belczak,+2045,+Capao+da+Imbuia,+Curitiba+-+PR",
     hours: {

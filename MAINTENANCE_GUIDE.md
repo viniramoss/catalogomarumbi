@@ -76,7 +76,7 @@ Cada produto tem um bloco por unidade, ligado ao **proCodigo** do GranMoney daqu
 Não edite à mão sem necessidade: use as ferramentas da seção 4.
 
 ### `src/config/storeConfig.ts` — as lojas
-Endereço, telefone, WhatsApp e horário de cada unidade, mostrados no catálogo, nas abas Localização e Informações e no rodapé. O campo `catalogo` liga a loja à chave usada no `catalogo.json` (`marumbi1`, `marumbi3`). Em `contatos` ficam o link do Instagram (vazio = o botão não aparece) e o e-mail do rodapé.
+Endereço, telefone, WhatsApp e horário de cada unidade, mostrados no catálogo, nas abas Localização e Informações e no rodapé. O campo `catalogo` liga a loja à chave usada no `catalogo.json` (`marumbi1`, `marumbi3`). Em `contatos` ficam o link do Instagram (vazio = o botão não aparece) e o e-mail do rodapé. A mensagem que já vem escrita quando a pessoa chama a loja no WhatsApp fica em `mensagemWhatsApp`, no mesmo arquivo, e vale para todos os botões de WhatsApp dos dois sites.
 
 ### Os dois sites na Vercel
 Os dois sites saem do mesmo código. Quem decide a unidade de cada um é a variável `VITE_UNIDADE` no projeto da Vercel (ver `src/config/site.ts`):
