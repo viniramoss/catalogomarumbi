@@ -361,7 +361,7 @@
     },
     {
       "id": "file-de-frango",
-      "nome": "Filé de Frango",
+      "nome": "Peito de Frango Fatiado",
       "categoria": "aves",
       "lojas": {
         "marumbi1": {
@@ -668,7 +668,7 @@
     },
     {
       "id": "peito-de-frango-sem-osso",
-      "nome": "Peito de Frango sem Osso",
+      "nome": "Peito de Frango sem Osso (inteiro)",
       "categoria": "aves",
       "lojas": {
         "marumbi1": {

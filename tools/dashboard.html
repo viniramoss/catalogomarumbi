@@ -92,7 +92,7 @@ const $ = id => document.getElementById(id);
 const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const preco = n => n == null ? '—' : n.toFixed(2).replace('.', ',');
 const norm = t => String(t ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
-const NOMES_CATEGORIA = { bovinos: 'Bovinos', suinos: 'Suínos', aves: 'Aves', 'moídas': 'Moídas' };
+const NOMES_CATEGORIA = { bovinos: 'Bovinos', suinos: 'Suínos', aves: 'Frango', 'moídas': 'Moídas' };
 
 function status(msg, erro = false) { $('status').textContent = msg; $('status').className = erro ? 'erro' : ''; }
 

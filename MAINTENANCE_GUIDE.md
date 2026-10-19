@@ -71,7 +71,7 @@ Cada produto tem um bloco por unidade, ligado ao **proCodigo** do GranMoney daqu
 - O nome no site é livre; o vínculo é pelo código.
 - Produto sem bloco de uma unidade não aparece naquela unidade.
 - `codigo: null` = ainda não foi ligado ao GranMoney (a sincronização ignora).
-- Categorias: `bovinos | suinos | aves | moídas`. Embutidos entram em Suínos; miúdos entram em Bovinos, menos a moela, que fica em Aves.
+- Categorias: `bovinos | suinos | aves | moídas`. Embutidos entram em Suínos; miúdos entram em Bovinos, menos a moela, que fica em Frango (chave `aves`).
 
 Não edite à mão sem necessidade: use as ferramentas da seção 4.
 

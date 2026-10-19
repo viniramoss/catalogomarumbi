@@ -32,7 +32,7 @@ export const catalogo = dados as Catalogo;
 export const categorias: { id: ProductCategory; nome: string }[] = [
   { id: 'bovinos', nome: 'Bovinos' },
   { id: 'suinos', nome: 'Suínos' },
-  { id: 'aves', nome: 'Aves' },
+  { id: 'aves', nome: 'Frango' },
   { id: 'moídas', nome: 'Moídas' },
 ];
 
