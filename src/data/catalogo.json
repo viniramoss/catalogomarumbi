@@ -1,7 +1,7 @@
 {
   "lojas": {
     "marumbi1": {
-      "atualizadoEm": "2026-10-15T23:05:34.362Z"
+      "atualizadoEm": "2026-10-28T19:39:58.219Z"
     },
     "marumbi3": {
       "atualizadoEm": "2026-10-15T23:03:49.217Z"
@@ -222,7 +222,7 @@
         "marumbi1": {
           "codigo": "8",
           "nomeGranMoney": "COSTELA RIPA",
-          "preco": 25.99
+          "preco": 28.99
         },
         "marumbi3": {
           "codigo": "8",
@@ -360,23 +360,6 @@
       }
     },
     {
-      "id": "file-de-frango",
-      "nome": "Peito de Frango Fatiado",
-      "categoria": "aves",
-      "lojas": {
-        "marumbi1": {
-          "codigo": "36",
-          "nomeGranMoney": "file de frango",
-          "preco": 29.99
-        },
-        "marumbi3": {
-          "codigo": "224",
-          "nomeGranMoney": "FILE DE FRANGO",
-          "preco": 29.99
-        }
-      }
-    },
-    {
       "id": "file-empanado-de-frango",
       "nome": "Filé Empanado de Frango",
       "categoria": "aves",
@@ -472,6 +455,17 @@
           "codigo": "49",
           "nomeGranMoney": "LINGUIÇA FILIPAK FINA",
           "preco": 34.99
+        }
+      }
+    },
+    {
+      "id": "linguica-toscana-friella",
+      "nome": "Linguiça Toscana Friella",
+      "categoria": "suinos",
+      "lojas": {
+        "marumbi1": {
+          "codigo": null,
+          "preco": 19.99
         }
       }
     },
@@ -663,6 +657,23 @@
           "codigo": "40",
           "nomeGranMoney": "PÉ DE FRANGO",
           "preco": 11.99
+        }
+      }
+    },
+    {
+      "id": "file-de-frango",
+      "nome": "Peito de Frango Fatiado",
+      "categoria": "aves",
+      "lojas": {
+        "marumbi1": {
+          "codigo": "36",
+          "nomeGranMoney": "file de frango",
+          "preco": 29.99
+        },
+        "marumbi3": {
+          "codigo": "224",
+          "nomeGranMoney": "FILE DE FRANGO",
+          "preco": 29.99
         }
       }
     },
