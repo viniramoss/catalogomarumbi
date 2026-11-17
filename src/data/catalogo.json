@@ -1,10 +1,10 @@
 {
   "lojas": {
     "marumbi1": {
-      "atualizadoEm": "2026-10-28T19:39:58.219Z"
+      "atualizadoEm": "2026-11-17T21:02:23.502Z"
     },
     "marumbi3": {
-      "atualizadoEm": "2026-10-15T23:03:49.217Z"
+      "atualizadoEm": "2026-11-17T21:02:23.502Z"
     }
   },
   "produtos": [
@@ -16,7 +16,7 @@
         "marumbi1": {
           "codigo": "1",
           "nomeGranMoney": "ACEM COM OSSO",
-          "preco": 28.99
+          "preco": 29.99
         },
         "marumbi3": {
           "codigo": "1",
@@ -137,7 +137,7 @@
         "marumbi1": {
           "codigo": "12",
           "nomeGranMoney": "FILE COM MIGNON",
-          "preco": 38.99
+          "preco": 42.99
         },
         "marumbi3": {
           "codigo": "12",
@@ -154,12 +154,12 @@
         "marumbi1": {
           "codigo": "5",
           "nomeGranMoney": "CONTRA FILE COM OSSO",
-          "preco": 34.99
+          "preco": 39.99
         },
         "marumbi3": {
           "codigo": "5",
           "nomeGranMoney": "CONTRA FILE C/OSSO",
-          "preco": 36.99
+          "preco": 41.99
         }
       }
     },
@@ -205,7 +205,7 @@
         "marumbi1": {
           "codigo": "7",
           "nomeGranMoney": "COSTELA PONTA",
-          "preco": 25.99
+          "preco": 29.99
         },
         "marumbi3": {
           "codigo": "7",
@@ -309,7 +309,7 @@
         "marumbi1": {
           "codigo": "9",
           "nomeGranMoney": "COXAO MOLE",
-          "preco": 44.99
+          "preco": 47.99
         },
         "marumbi3": {
           "codigo": "9",
@@ -603,7 +603,7 @@
         "marumbi3": {
           "codigo": "58",
           "nomeGranMoney": "PALETA SUÍNA",
-          "preco": 13.99
+          "preco": 15.99
         }
       }
     },
@@ -644,7 +644,7 @@
         "marumbi1": {
           "codigo": "22",
           "nomeGranMoney": "PATINHO SEM OSSO",
-          "preco": 44.99
+          "preco": 47.99
         }
       }
     },
@@ -707,7 +707,7 @@
         "marumbi3": {
           "codigo": "59",
           "nomeGranMoney": "PERNIL SUÍNO",
-          "preco": 14.99
+          "preco": 15.99
         }
       }
     },
@@ -731,7 +731,7 @@
         "marumbi1": {
           "codigo": "25",
           "nomeGranMoney": "PICANHA",
-          "preco": 59.99
+          "preco": 79.99
         }
       }
     },
@@ -772,7 +772,7 @@
         "marumbi1": {
           "codigo": "27",
           "nomeGranMoney": "POSTA BRANCA",
-          "preco": 39.99
+          "preco": 41.99
         },
         "marumbi3": {
           "codigo": "27",
@@ -789,7 +789,7 @@
         "marumbi1": {
           "codigo": "28",
           "nomeGranMoney": "POSTA VERMELHA",
-          "preco": 39.99
+          "preco": 41.99
         },
         "marumbi3": {
           "codigo": "28",
@@ -806,7 +806,7 @@
         "marumbi1": {
           "codigo": "30",
           "nomeGranMoney": "SETINHO",
-          "preco": 29.99
+          "preco": 32.99
         },
         "marumbi3": {
           "codigo": "30",
